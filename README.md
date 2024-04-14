@@ -32,7 +32,7 @@ The project directory is structured as follows:
 
 ## Installation
 
-To run the project locally, follow these steps:
+To install the project locally, follow these steps:
 
 ```bash
 # Clone the repository
@@ -48,12 +48,32 @@ npm install
 tsc
 ```
 
+To install the project using docker, follow these steps:
+
+```bash
+# Clone the repository
+git clone https://github.com/markomilunovic/ExpressTypeScriptAPI.git
+
+# Navigate to the project directory
+cd ExpressTypeScriptAPI
+```
+
 ## Usage
 
-To start the server, run the following command:
+To start the server locally, run the following command:
 
 ```bash
 nodemon dist/app.js
+```
+
+To start the server using docker, run the following commands:
+
+```bash
+# Build and start the Docker containers
+docker-compose up
+
+#Stop the running Docker containers
+docker-compose down
 ```
 
 ## Endpoints
