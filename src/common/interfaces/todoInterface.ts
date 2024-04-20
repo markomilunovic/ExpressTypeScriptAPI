@@ -14,6 +14,7 @@ interface TodoItem {
     title: string;
     description: string;
     status?: 'pending' | 'completed'; 
+    imagePath?: string
 };
 
 export type{

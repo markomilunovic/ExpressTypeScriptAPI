@@ -17,6 +17,9 @@ const todoItem = sequelize.define('todoItems', {
     status: {
         type: DataTypes.ENUM('pending', 'completed'),
         defaultValue: 'pending'
+    },
+    imagePath: {
+        type: DataTypes.STRING,
     }
 }, {
     freezeTableName: true,

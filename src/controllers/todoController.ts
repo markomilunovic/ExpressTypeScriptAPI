@@ -4,9 +4,15 @@ import type { TodoCreateRequestBody, TodoUpdateRequestBody } from '../common/int
 
 
 //Creating a new todo item
-const createTodo = async (req: Request<{}, {}, TodoCreateRequestBody>, res: Response): Promise<void> => {
+const createTodo = async (req: Request<{}, {}, TodoCreateRequestBody, Express.Multer.File >, res: Response): Promise<void> => {
     try {
-        const TodoItem = await todoService.create(req.body);
+        // Check if req.file exists
+        if (!req.file) {
+            throw new Error('No file uploaded');
+        };
+        
+        const imagePath = req.file.path;
+        const TodoItem = await todoService.create(req.body, imagePath);
         res.status(201).json(TodoItem);
     } catch (error) {
         res.status(500).send('Error creating todo item');
@@ -58,10 +64,16 @@ const getTodoById = async (req: Request<{ id: string }, {}, {}>, res: Response):
 };
 
 // Updating a todo item
-const updateTodo = async (req: Request<{ id: string }, {}, TodoUpdateRequestBody>, res: Response): Promise<void> => {
+const updateTodo = async (req: Request<{ id: string }, {}, TodoUpdateRequestBody, Express.Multer.File>, res: Response): Promise<void> => {
     try {
         const id = req.params.id;
-        const result: boolean = await todoService.update(id, req.body);
+
+        if (!req.file) {
+            throw new Error('No file uploaded');
+        };
+
+        const imagePath = req.file.path;
+        const result: boolean = await todoService.update(id, req.body, imagePath);
         if (!result) {
             res.status(404).send('Todo item not found');
         } else {
@@ -76,6 +88,7 @@ const updateTodo = async (req: Request<{ id: string }, {}, TodoUpdateRequestBody
 const deleteTodo = async (req: Request<{ id: string }, {}, {}>, res: Response): Promise<void> => {
     try {
         const id = req.params.id;
+        
         const result: boolean = await todoService.Delete(id);
         if (!result) {
             res.status(404).send('Todo item not found');

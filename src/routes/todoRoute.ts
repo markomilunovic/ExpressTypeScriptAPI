@@ -1,5 +1,7 @@
 import express, { Router } from 'express';
-import authMiddleware from '../middleware/authMiddleware';
+//import authMiddleware from '../middleware/authMiddleware';
+import upload from '../middleware/multerMiddleware';
+
 import {
     createTodo,
     getAllTodos,
@@ -11,7 +13,8 @@ import {
 
 const router: Router = express.Router();
 
- router.use(authMiddleware);
+//router.use(authMiddleware);
+router.use(upload.single('file'));
 
 router.route('/')
     .post(createTodo)

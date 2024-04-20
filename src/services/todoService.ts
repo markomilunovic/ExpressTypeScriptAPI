@@ -2,8 +2,8 @@ import todoRepository from '../repositories/todoRepository';
 import type { TodoCreateRequestBody, TodoUpdateRequestBody, TodoItem } from '../common/interfaces/todoInterface';
 
 
-    const create = async (body: TodoCreateRequestBody): Promise<TodoItem> => {
-        return await todoRepository.createTodo(body);
+    const create = async (body: TodoCreateRequestBody, imagePath: string): Promise<TodoItem> => {
+        return await todoRepository.createTodo(body, imagePath);
     };
 
 
@@ -32,8 +32,8 @@ import type { TodoCreateRequestBody, TodoUpdateRequestBody, TodoItem } from '../
         return await todoRepository.getTodoById(id);
     };
 
-    const update = async (id: string, body: TodoUpdateRequestBody): Promise<boolean> => {
-        return await todoRepository.updateTodo(id, body);
+    const update = async (id: string, body: TodoUpdateRequestBody, imagePath: string): Promise<boolean> => {
+        return await todoRepository.updateTodo(id, body, imagePath);
     };
     
 
